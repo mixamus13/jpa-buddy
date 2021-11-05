@@ -1,11 +1,21 @@
 package com.example.jpabuddy.entity;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Table(name = "comment")
 @Entity
 public class Comment {
@@ -26,43 +36,20 @@ public class Comment {
   @Column(name = "details")
   private JsonNode details;
 
-  public JsonNode getDetails() {
-    return details;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+      return false;
+    }
+    Comment comment = (Comment) o;
+    return id != null && Objects.equals(id, comment.id);
   }
 
-  public void setDetails(JsonNode details) {
-    this.details = details;
-  }
-
-  public Author getAuthorId() {
-    return authorId;
-  }
-
-  public void setAuthorId(Author authorId) {
-    this.authorId = authorId;
-  }
-
-  public Article getArticleId() {
-    return articleId;
-  }
-
-  public void setArticleId(Article articleId) {
-    this.articleId = articleId;
-  }
-
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
   }
 }
