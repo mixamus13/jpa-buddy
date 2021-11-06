@@ -1,17 +1,22 @@
 package com.example.jpabuddy.entity;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.Hibernate;
 
+@FieldDefaults(level = PRIVATE)
 @Getter
 @Setter
 @ToString
@@ -22,19 +27,19 @@ public class Comment {
 
   @Id
   @Column(name = "id", nullable = false)
-  private Long id;
+  Long id;
 
   @Column(name = "text", nullable = false)
-  private String text;
+  String text;
 
   @Column(name = "article_id")
-  private Article articleId;
+  Article articleId;
 
   @Column(name = "author_id")
-  private Author authorId;
+  Author authorId;
 
   @Column(name = "details")
-  private JsonNode details;
+  JsonNode details;
 
   @Override
   public boolean equals(Object o) {

@@ -1,5 +1,7 @@
 package com.example.jpabuddy.entity;
 
+import static lombok.AccessLevel.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -10,9 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
+@FieldDefaults(level = PRIVATE)
 @Table(name = "author")
 @Entity
 @Getter
@@ -22,20 +27,20 @@ public class Author {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column(name = "id", nullable = false)
-  private Long id;
+  Long id;
 
   @Column(name = "name", nullable = false)
-  private String name;
+  String name;
 
   @Column(name = "age")
-  private Long age;
+  Long age;
 
   @Column(name = "email", length = 70)
-  private String email;
+  String email;
 
   @Column(name = "bio")
-  private String bio;
+  String bio;
 
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
-  private List<Award> awards = new ArrayList<>();
+  List<Award> awards = new ArrayList<>();
 }
