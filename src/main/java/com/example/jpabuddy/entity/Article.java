@@ -1,10 +1,14 @@
 package com.example.jpabuddy.entity;
 
-import static lombok.AccessLevel.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.ToString.Exclude;
+import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,16 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.ToString.Exclude;
-import lombok.experimental.FieldDefaults;
-import org.hibernate.Hibernate;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
 
-@FieldDefaults(level = PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "article", indexes = {
     @Index(name = "idx_article_title", columnList = "title")
 })
