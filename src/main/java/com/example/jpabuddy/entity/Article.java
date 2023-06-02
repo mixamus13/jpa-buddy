@@ -25,7 +25,7 @@ import java.util.Objects;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "article", indexes = {
-    @Index(name = "idx_article_title", columnList = "title")
+        @Index(name = "idx_article_title", columnList = "title")
 })
 @Entity
 @Getter
@@ -34,41 +34,41 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Article {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
-  Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    Long id;
 
-  @Column(name = "title", length = 100)
-  String title;
+    @Column(name = "title", length = 100)
+    String title;
 
-  @Column(name = "article_text", length = 3000)
-  String articleText;
+    @Column(name = "article_text", length = 3000)
+    String articleText;
 
-  @ManyToMany
-  @JoinTable(name = "article_authors",
-      joinColumns = @JoinColumn(name = "article_id"),
-      inverseJoinColumns = @JoinColumn(name = "authors_id"))
-  @Exclude
-  List<Author> authors;
+    @ManyToMany
+    @JoinTable(name = "article_authors",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "authors_id"))
+    @Exclude
+    List<Author> authors;
 
-  @Column(name = "publication_date")
-  private LocalDate publicationDate;
+    @Column(name = "publication_date")
+    private LocalDate publicationDate;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        Article article = (Article) o;
+        return id != null && Objects.equals(id, article.id);
     }
-    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
-      return false;
-    }
-    Article article = (Article) o;
-    return id != null && Objects.equals(id, article.id);
-  }
 
-  @Override
-  public int hashCode() {
-    return getClass().hashCode();
-  }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
